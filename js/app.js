@@ -35,8 +35,13 @@ var Player = function() {
   this.sprite = 'images/char-boy.png';
 };
 
-Player.prototype.update = function(dt) {
-
+Player.prototype.update = function(xPosition, yPosition) {
+  if(xPosition !== undefined) {
+    this.x = xPosition;
+  }
+  if(yPosition !== undefined) {
+    this.y = yPosition;
+  }
 };
 
 Player.prototype.render = function() {
@@ -45,58 +50,62 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(key) {
 
-  var xLen = 101,
-      yLen = 83;
+  var xLength = 101,
+      yLength = 83,
+      xPosition,
+      yPosition;
 
-  if(key != undefined){
-    if(isX()){
+  if(key !== undefined) {
+    if(isAxisX()) {
       moveX();
     }
-    else{
+    else {
       moveY();
+    }
+
+    if(isOnLimit()) {
+      player.update(xPosition, yPosition);
     }
   }
 
-  function isX(){
+  function isAxisX() {
     return key === 'right' || key === 'left' ?
       true :
       false;
   }
 
-  function moveX(){
-    if(player.x > minX && player.x < maxX){
+  function moveX() {
       key === 'right' ?
-        player.x += xLen :
-        player.x += -xLen;
-    }
+        xPosition = player.x + xLength :
+        xPosition = player.x - xLength;
   }
 
-  function moveY(){
+  function moveY() {
     key === 'down' ?
-      player.y += yLen :
-      player.y += -yLen;
+      yPosition = player.y + yLength :
+      yPosition = player.y - yLength;
   }
 
-  // function isOnLimit(axisX){
-  //   //minX = -2 | maxX = 402
-  //   //minY = 390 | maxY = -25
-  //
-  //   var maxX = 402,
-  //       minX = -2,
-  //       maxY = 390,
-  //       minY = -25;
-  //
-  //   if(axisX === true){
-  //       var newPos = key === 'right' ?
-  //         player.x += xLen :
-  //         player.x += -xLen;
-  //
-  //       return newPos > minX && newPos < maxX ?
-  //
-  //
-  //   }
-  //   positionX = player.x + xLen
-  // }
+  function isOnLimit() {
+    var maxX = 402,
+        minX = -2,
+        maxY = 390,
+        minY = -25,
+        onLimit = false;
+
+    if(xPosition !== undefined) {
+      if(xPosition >= minX && xPosition <= maxX) {
+        onLimit = true;
+      }
+    }
+    if(yPosition !== undefined) {
+      if (yPosition >= minY && yPosition <= maxY) {
+          onLimit = true;
+      }
+    }
+
+    return onLimit;
+  }
 };
 
 // Now instantiate your objects.
