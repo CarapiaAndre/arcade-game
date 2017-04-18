@@ -50,9 +50,7 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(key) {
 
-  var xLength = 101,
-      yLength = 83,
-      xPosition,
+  var xPosition,
       yPosition;
 
   if(key !== undefined) {
@@ -75,12 +73,16 @@ Player.prototype.handleInput = function(key) {
   }
 
   function moveX() {
-      key === 'right' ?
-        xPosition = player.x + xLength :
-        xPosition = player.x - xLength;
+    var xLength = 101;
+
+    key === 'right' ?
+      xPosition = player.x + xLength :
+      xPosition = player.x - xLength;
   }
 
   function moveY() {
+    var yLength = 83;
+
     key === 'down' ?
       yPosition = player.y + yLength :
       yPosition = player.y - yLength;
