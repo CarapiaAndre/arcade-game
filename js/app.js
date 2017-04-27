@@ -9,17 +9,17 @@ var Enemy = function(axisY) {
     // we've provided one for you to get started
     this.x = 10;
     this.y = axisY;
-    this.speed = randomSpeed();
-
-    function randomSpeed() {
-      var maxSpeed = 8,
-          minSpeed = 3;
-      return Math.floor((Math.random() * maxSpeed) + minSpeed);
-    }
+    this.speed = this.randomSpeed();
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+};
+
+Enemy.prototype.randomSpeed = function() {
+  var minSpeed = 2,
+      maxSpeed = 5;
+  return Math.floor((Math.random() * maxSpeed) + minSpeed);
 };
 
 // Update the enemy's position, required method for game
@@ -28,7 +28,15 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += ((50 * dt) * this.speed);
+    var maxX = 402;
+
+    if(this.x <= maxX) {
+        this.x += ((50 * this.speed) * dt);
+    }
+    else {
+      this.x = 10;
+      this.speed = this.randomSpeed();
+    }
 };
 
 // Draw the enemy on the screen, required method for game
