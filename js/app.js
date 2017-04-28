@@ -54,12 +54,25 @@ var Player = function() {
 };
 
 Player.prototype.update = function(xPosition, yPosition) {
+  var winPosition = 0;
+
   if(xPosition !== undefined) {
     this.x = xPosition;
   }
   if(yPosition !== undefined) {
-    this.y = yPosition;
+    if(yPosition < winPosition) {
+      this.win(true);
+    }
+    else {
+      this.y = yPosition;
+    }
   }
+};
+
+Player.prototype.win = function(boolWin) {
+  var initialPosition = 390;
+
+  this.y = initialPosition;
 };
 
 Player.prototype.render = function() {
