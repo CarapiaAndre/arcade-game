@@ -9,6 +9,8 @@ var Enemy = function(axisY) {
     // we've provided one for you to get started
     this.x = 10;
     this.y = axisY;
+    this.width = 100;
+    this.height = 160;
     this.speed = this.randomSpeed();
 
     // The image/sprite for our enemies, this uses
@@ -50,23 +52,44 @@ Enemy.prototype.render = function() {
 var Player = function() {
   this.x = 200;
   this.y = 390;
+  this.width = 100;
+  this.height = 160;
   this.sprite = 'images/char-boy.png';
 };
 
 Player.prototype.update = function(xPosition, yPosition) {
   var winPosition = 0;
 
+  this.detectCollision();
+
   if(xPosition !== undefined) {
     this.x = xPosition;
+    if(this.detectCollision()){
+      this.win(false);
+    }
   }
   if(yPosition !== undefined) {
+    this.y = yPosition;
+    
     if(yPosition < winPosition) {
       this.win(true);
     }
-    else {
-      this.y = yPosition;
-    }
   }
+};
+
+Player.prototype.detectCollision = function() {
+  var crashed = false;
+
+  for(enemy in allEnemies) {
+    if(this.x < enemy.x + enemy.width &&
+      this.x + this.width > enemy.x &&
+      this.y < enemy.y + enemy.height &&
+      this.y + this.height > enemy.y) {
+        crashed = true;
+    }
+ }
+
+ log(crashed);
 };
 
 Player.prototype.win = function(boolWin) {
