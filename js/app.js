@@ -9,8 +9,11 @@ var Enemy = function(axisY) {
     // we've provided one for you to get started
     this.x = 10;
     this.y = axisY;
+
+    //Width and Height is necessery for checkCollisions() function.
     this.width = 75;
     this.height = 80;
+
     this.speed = this.randomSpeed();
 
     // The image/sprite for our enemies, this uses
@@ -18,6 +21,7 @@ var Enemy = function(axisY) {
     this.sprite = 'images/enemy-bug.png';
 };
 
+//Give the enemy a random speed, to make things more unpredictable
 Enemy.prototype.randomSpeed = function() {
   var minSpeed = 2,
       maxSpeed = 5;
@@ -30,8 +34,11 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
+    //Variable to define Max limit of Axis X
     var maxX = 402;
 
+    //Check if the enemy is on the limit
     if(this.x <= maxX) {
         this.x += ((50 * this.speed) * dt);
     }
@@ -52,15 +59,42 @@ Enemy.prototype.render = function() {
 var Player = function() {
   this.x = 200;
   this.y = 390;
+
+  //Width and Height is necessery for checkCollisions() function.
   this.width = 75;
   this.height = 80;
+
+  //Points for scoreboard (:
+  this.victories = 0;
+  this.deaths = 0;
+
   this.sprite = 'images/char-boy.png';
 };
 
+
+//Write player score from victories and deaths properties
+Player.prototype.scoreboard = function() {
+  ctx.font = "18px Arial";
+
+  //Overwrite the old scoreboard
+  ctx.fillStyle = "white";
+  ctx.fillRect(10,590,476,18);
+
+  //Write the scoreboard
+  ctx.fillStyle = "black"
+  ctx.fillText("Victories: " + this.victories + "",10,606);
+  ctx.fillText("Deaths: " + this.deaths + "",406,606);
+}
+
+//Update player position and check if has collision or victory position
+//parameters: xPosition, a new player position of Axis X;
+// yPosition, a new player position of Axis Y;
 Player.prototype.update = function(xPosition, yPosition) {
+
+  //Position of axisY that define river line to win
   var winPosition = 0;
 
-  if(this.detectCollision()){
+  if(this.detectCollision()) {
     this.win(false);
   }
 
@@ -75,31 +109,48 @@ Player.prototype.update = function(xPosition, yPosition) {
   }
 };
 
+//Detect if the player has collided with any enemy
 Player.prototype.detectCollision = function() {
   var crashed = false;
 
-  for(enemy in allEnemies) {
-    if(this.x < allEnemies[enemy].x + allEnemies[enemy].width &&
-      this.x + this.width > allEnemies[enemy].x &&
-      this.y < allEnemies[enemy].y + allEnemies[enemy].height &&
-      this.height + this.y > allEnemies[enemy].y) {
-        crashed = true;
-    }
- }
+ allEnemies.forEach(function(enemy) {
+   if(player.x < enemy.x + enemy.width &&
+     player.x + player.width > enemy.x &&
+     player.y < enemy.y + enemy.height &&
+     player.height + player.y > enemy.y) {
+       crashed = true;
+   }
+ });
 
  return crashed;
 };
 
+//Define the end of round, moving the player for the initialPosition and call player.scoreboard()
+//Parameter: boolWin, a boolean to define whether the player won or lost.
 Player.prototype.win = function(boolWin) {
+
+  //Starting position of Axis Y in the map
   var initialPosition = 390;
+
+  if(boolWin === true) {
+    this.victories += 1;
+  }
+  else {
+    this.deaths += 1;
+  }
+
+  this.scoreboard();
 
   this.y = initialPosition;
 };
 
+//Redraw the player image in the new position.
 Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+//Sets the player moviment from a pressed key
+//parameters: key, pressed key from a listener.
 Player.prototype.handleInput = function(key) {
 
   var xPosition,
@@ -118,13 +169,17 @@ Player.prototype.handleInput = function(key) {
     }
   }
 
+  //Check if the key is axis X or axis Y
   function isAxisX() {
     return key === 'right' || key === 'left' ?
       true :
       false;
   }
 
+  //Check if is right or left and update the x property of player.
   function moveX() {
+
+    //lenght of the moviment
     var xLength = 101;
 
     key === 'right' ?
@@ -132,7 +187,10 @@ Player.prototype.handleInput = function(key) {
       xPosition = player.x - xLength;
   }
 
+  //Check if is up or down and update the y property of player.
   function moveY() {
+
+    //lenght of the moviment
     var yLength = 83;
 
     key === 'down' ?
@@ -140,6 +198,7 @@ Player.prototype.handleInput = function(key) {
       yPosition = player.y - yLength;
   }
 
+  //Check if the moviment is on limit of map.
   function isOnLimit() {
     var maxX = 402,
         minX = -2,
