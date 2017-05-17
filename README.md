@@ -4,7 +4,7 @@
 
 ## Instalando o Jogo
 
- 1. Clique em "Clone Or Download" nesta [página](https://github.com/CarapiaAndre/arcade-game) do GitHub
+ 1. Clique em "Clone Or Download" nesta [página](https://github.com/CarapiaAndre/arcade-game) do GitHub  
  ![Image of Yaktocat](images/hint-download.png)
 
  2. Seleciona Download ZIP se não usar Git, caso contrário basta copiar a SVN para clonar o repositório.
