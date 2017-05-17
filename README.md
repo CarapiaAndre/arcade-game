@@ -1,6 +1,28 @@
-frontend-nanodegree-arcade-game
-===============================
+# Clone do Clássico Game Arcade
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+ Esse game foi um clone do clássico Arcade Game, tendo como principal objetivo explorar Javascript Orientado a Objeto.
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+## Instalando o Jogo
+
+ 1. Clique em "Clone Or Download" nesta [página](https://github.com/CarapiaAndre/arcade-game) do GitHub
+ ![Image of Yaktocat](images/hint-download.png)
+
+ 2. Seleciona Download ZIP se não usar Git, caso contrário basta copiar a SVN para clonar o repositório.
+
+ 3. Descompacte o jogo.
+
+ 4. Basta abrir o arquivo **index.html**
+
+## Jogando
+
+### Regras
+
+  1. **Jogabilidade** - Utilize as setas do teclado para mover o personagem. :arrow_up::arrow_right::arrow_down::arrow_left:
+
+  2. **Objetivo** - Atravessar o personagem até o lago. :running:
+
+  3. **Obstaculos** - Cuidado! Possuem joaninhas gigantes que você deve evitar colidir. :beetle:
+
+  4. **Pontuação** - Cada atravessia sem colidir com inimigos contabiliza uma vitória, cada vez que você colidir com uma joaninha gigante contará uma morte. :video_game:
+
+  Aproveite! Faça o máximo de pontos que conseguir com o menor número de mortes possíveis! :thumbsup:
