@@ -5,16 +5,30 @@ var log = function(msg) {
   console.log(msg);
 };
 
+//Main properties config for player and enemy
+var appConfig = {
+ playerInitialPosX : 200,
+ playerInitialPosY : 390,
+ playerWidth: 75,
+ playerHeight: 80,
+
+ enemyInitialPosX: 10,
+ enemyWidth: 75,
+ enemyHeight: 80,
+ enemyMinSpeed: 2,
+ enemyMaxSpeed: 5
+};
+
 // Enemies our player must avoid
 var Enemy = function(axisY) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-    this.x = 10;
+    this.x = appConfig.enemyInitialPosX;
     this.y = axisY;
 
     //Width and Height is necessery for checkCollisions() function.
-    this.width = 75;
-    this.height = 80;
+    this.width = appConfig.enemyWidth;
+    this.height = appConfig.enemyHeight;
 
     this.speed = this.randomSpeed();
 
@@ -25,9 +39,7 @@ var Enemy = function(axisY) {
 
 //Give the enemy a random speed, to make things more unpredictable
 Enemy.prototype.randomSpeed = function() {
-  var minSpeed = 2,
-      maxSpeed = 5;
-  return Math.floor((Math.random() * maxSpeed) + minSpeed);
+  return Math.floor((Math.random() * appConfig.enemyMaxSpeed) + appConfig.enemyMinSpeed);
 };
 
 // Update the enemy's position, required method for game
@@ -59,12 +71,13 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function() {
-  this.x = 200;
-  this.y = 390;
+
+  this.x = appConfig.playerInitialPosX;
+  this.y = appConfig.playerInitialPosY;
 
   //Width and Height is necessery for checkCollisions() function.
-  this.width = 75;
-  this.height = 80;
+  this.width = appConfig.playerWidth;
+  this.height = appConfig.playerHeight;
 
   //Points for scoreboard (:
   this.victories = 0;
