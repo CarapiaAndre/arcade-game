@@ -1,3 +1,5 @@
+"use strict";
+
 //Just to simplify console.log when developing
 var log = function(msg) {
   console.log(msg);
@@ -36,14 +38,14 @@ Enemy.prototype.update = function(dt) {
     // all computers.
 
     //Variable to define Max limit of Axis X
-    var maxX = 402;
+    var maxX = 500;
 
     //Check if the enemy is on the limit
     if(this.x <= maxX) {
         this.x += ((50 * this.speed) * dt);
     }
     else {
-      this.x = 10;
+      this.x = -100;
       this.speed = this.randomSpeed();
     }
 };
