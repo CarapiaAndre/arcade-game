@@ -96,10 +96,10 @@ Player.prototype.scoreboard = function() {
   ctx.fillRect(10,590,476,18);
 
   //Write the scoreboard
-  ctx.fillStyle = "black"
+  ctx.fillStyle = "black";
   ctx.fillText("Victories: " + this.victories + "",10,606);
   ctx.fillText("Deaths: " + this.deaths + "",406,606);
-}
+};
 
 //Update player position and check if has collision or victory position
 //parameters: xPosition, a new player position of Axis X;
