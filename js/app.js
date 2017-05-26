@@ -197,9 +197,9 @@ Player.prototype.handleInput = function(key) {
     //lenght of the moviment
     var xLength = 101;
 
-    key === 'right' ?
-      xPosition = player.x + xLength :
-      xPosition = player.x - xLength;
+    xPosition = (key === 'right') ?
+      player.x + xLength :
+      player.x - xLength;
   }
 
   //Check if is up or down and update the y property of player.
@@ -208,9 +208,9 @@ Player.prototype.handleInput = function(key) {
     //lenght of the moviment
     var yLength = 83;
 
-    key === 'down' ?
-      yPosition = player.y + yLength :
-      yPosition = player.y - yLength;
+    yPosition = (key === 'down') ?
+      player.y + yLength :
+      player.y - yLength;
   }
 
   //Check if the moviment is on limit of map.
