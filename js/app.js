@@ -19,10 +19,10 @@ var appConfig = {
   enemyMaxSpeed: 5
 };
 
-// Enemies our player must avoid
+//Enemies our player must avoid
 var Enemy = function(axisY) {
-  // Variables applied to each of our instances go here,
-  // we've provided one for you to get started
+  //Variables applied to each of our instances go here,
+  //we've provided one for you to get started
   this.x = appConfig.enemyInitialPosX;
   this.y = axisY;
 
@@ -32,8 +32,8 @@ var Enemy = function(axisY) {
 
   this.speed = this.randomSpeed();
 
-  // The image/sprite for our enemies, this uses
-  // a helper we've provided to easily load images
+  //The image/sprite for our enemies, this uses
+  //a helper we've provided to easily load images
   this.sprite = 'images/enemy-bug.png';
 };
 
@@ -42,12 +42,12 @@ Enemy.prototype.randomSpeed = function() {
   return Math.floor((Math.random() * appConfig.enemyMaxSpeed) + appConfig.enemyMinSpeed);
 };
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+//Update the enemy's position, required method for game
+//Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-  // You should multiply any movement by the dt parameter
-  // which will ensure the game runs at the same speed for
-  // all computers.
+  //You should multiply any movement by the dt parameter
+  //which will ensure the game runs at the same speed for
+  //all computers.
 
   //Variable to define Max limit of Axis X
   var maxX = 500;
@@ -61,14 +61,14 @@ Enemy.prototype.update = function(dt) {
   }
 };
 
-// Draw the enemy on the screen, required method for game
+//Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+//Now write your own player class
+//This class requires an update(), render() and
+//a handleInput() method.
 var Player = function() {
 
   this.x = appConfig.playerInitialPosX;
@@ -87,8 +87,8 @@ var Player = function() {
   this.addKeyListener();
 };
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+//This listens for key presses and sends the keys to your
+//Player.handleInput() method. You don't need to modify this.
 Player.prototype.addKeyListener = function() {
   var self = this;
 
@@ -119,7 +119,7 @@ Player.prototype.scoreboard = function() {
 
 //Update player position and check if has collision or victory position
 //parameters: xPosition, a new player position of Axis X;
-// yPosition, a new player position of Axis Y;
+//yPosition, a new player position of Axis Y;
 Player.prototype.update = function(xPosition, yPosition) {
 
   //Position of axisY that define river line to win
@@ -179,7 +179,7 @@ Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-//Sets the player moviment from a pressed key
+//Sets the player movement from a pressed key
 //parameters: key, pressed key from a listener.
 Player.prototype.handleInput = function(key) {
 
@@ -208,7 +208,7 @@ Player.prototype.handleInput = function(key) {
   //Check if is right or left and update the x property of Player.
   function moveX(xPos) {
 
-    //lenght of the moviment
+    //lenght of the movement
     var xLength = 101;
 
     xPosition = (key === 'right') ?
@@ -219,7 +219,7 @@ Player.prototype.handleInput = function(key) {
   //Check if is up or down and update the y property of Player.
   function moveY(yPos) {
 
-    //lenght of the moviment
+    //lenght of the movement
     var yLength = 83;
 
     yPosition = (key === 'down') ?
@@ -227,7 +227,7 @@ Player.prototype.handleInput = function(key) {
       yPos - yLength;
   }
 
-  //Check if the moviment is on limit of map.
+  //Check if the movement is on limit of map.
   function isOnLimit() {
     var maxX = 402,
       minX = -2,
@@ -250,9 +250,9 @@ Player.prototype.handleInput = function(key) {
   }
 };
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
+//Now instantiate your objects.
+//Place all enemy objects in an array called allEnemies
 var allEnemies = [new Enemy(60), new Enemy(143), new Enemy(226)];
 
-// Place the player object in a variable called player
+//Place the player object in a variable called player
 var player = new Player();
