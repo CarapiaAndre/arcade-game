@@ -109,7 +109,7 @@ Player.prototype.scoreboard = function() {
 
   //Overwrite the old scoreboard
   ctx.fillStyle = "white";
-  ctx.fillRect(10, 590, 476, 18);
+  ctx.fillRect(10, 590, 485, 18);
 
   //Write the scoreboard
   ctx.fillStyle = "black";
