@@ -84,7 +84,7 @@ var Player = function() {
 
   this.sprite = 'images/char-boy.png';
 
-  this.addKeyListener(this);
+  this.addKeyListener();
 };
 
 // This listens for key presses and sends the keys to your
