@@ -89,7 +89,9 @@ var Player = function() {
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-Player.prototype.addKeyListener = function(player) {
+Player.prototype.addKeyListener = function() {
+  var self = this;
+
   document.addEventListener('keyup', function(e) {
     var allowedKeys = {
       37: 'left',
@@ -97,7 +99,7 @@ Player.prototype.addKeyListener = function(player) {
       39: 'right',
       40: 'down'
     };
-    player.handleInput(allowedKeys[e.keyCode]);
+    self.handleInput(allowedKeys[e.keyCode]);
   });
 };
 
